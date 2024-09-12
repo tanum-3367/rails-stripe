@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DATABASE_HOST") %>
+  port: <%= ENV.fetch("DATABASE_PORT") %>
+  username: <%= ENV.fetch("MYSQL_USER") %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD") %>
+  database: <%= ENV.fetch("MYSQL_DATABASE") %>
+
+development:
+  <<: *default
+  database: stripe_development
+
+test:
+  <<: *default
+  database: stripe_test
+
+production:
+  <<: *default
+  database: stripe_production
+  username: be
+  password: <%= ENV["BE_DATABASE_PASSWORD"] %>
